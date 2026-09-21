@@ -1,11 +1,34 @@
 import { Toaster } from "react-hot-toast";
-import { Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedLayout from "./components/ProtectedLayout";
+import Dashboard from "./pages/Dashboard";
+import Session from "./pages/Session";
+import Pricing from "./pages/Pricing";
+import MeetingRoom from "./pages/MeetingRoom";
 
 const App = () => {
   return (
     <>
       <Toaster />
-      <Routes></Routes>
+      <Routes>
+        {/* Public Routes  */}
+        <Route path="/login" element={<Login mode="login" />} />
+        <Route path="/register" element={<Login mode="register" />} />
+
+        {/* Private Routes  */}
+        <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/sessions" element={<Session />} />
+            <Route path="/pricing" element={<Pricing />} />
+          </Route>
+          <Route path="/meeting/:meetingId" element={<MeetingRoom />} />
+        </Route>
+
+        {/* other Routes  */}
+      </Routes>
     </>
   );
 };
