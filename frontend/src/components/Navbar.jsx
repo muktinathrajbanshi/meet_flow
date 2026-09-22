@@ -1,5 +1,33 @@
+import { Link, useLocation } from "react-router-dom";
+import { dummyUser } from "../assets/asset";
+
 const Navbar = () => {
-  return <div>Navbar</div>;
+  const { isSignedIn, user } = { user: dummyUser, isSignedIn: true };
+  const location = useLocation();
+  const userName =
+    user?.fullName ||
+    user?.firstName ||
+    user?.primaryEmailAddress?.emailAddress?.split("@")[0] ||
+    "User";
+
+  return (
+    <header
+      className="w-full max-w-305 mx-auto bg-white/90 backdrop-blur xl:rounded-b-xl
+    sticky top-0 z-40 px-6 py-4 flex items-center justify-between border border-slate-200"
+    >
+      {/* Brand Logo & Navigation Links  */}
+      <div className="flex items-center gap-6">
+        <Link to="/dashboard" className="flex items-center gap-1.5">
+          <img src="/logo.svg" alt="MeetUp Logo" className="size-6.5" />
+          <span className="text-2xl font-medium tracking-tight text-slate-900 flex items-center">
+            MeetUp<span className="text-primary">.</span>
+          </span>
+        </Link>
+      </div>
+
+      {/* Right Profile / UserButton  */}
+    </header>
+  );
 };
 
 export default Navbar;
