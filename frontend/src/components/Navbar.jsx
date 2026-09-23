@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { dummyUser } from "../assets/asset";
-import { Astroid, HistoryIcon, LayoutDashboardIcon } from "lucide-react";
+import { AstroidIcon, HistoryIcon, LayoutDashboardIcon } from "lucide-react";
 
 const Navbar = () => {
   const { isSignedIn, user } = { user: dummyUser, isSignedIn: true };
@@ -50,7 +50,7 @@ const Navbar = () => {
               className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 
             ${location.pathname === "/pricing" ? "ring ring-blue-100 bg-blue-50 text-slate-800" : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"}`}
             >
-              <Astroid className="w-3.5 h-3.5" />
+              <AstroidIcon className="w-3.5 h-3.5" />
               Pricing
             </Link>
           </nav>
@@ -58,6 +58,15 @@ const Navbar = () => {
       </div>
 
       {/* Right Profile / UserButton  */}
+      {isSignedIn && (
+        <div className="flex items-center gap-4">
+          <Link
+            to="/sessions"
+            className="md:hidden text-xs font-medium text-slate-600
+          hover:text-primary flex items-center gap-1"
+          ></Link>
+        </div>
+      )}
     </header>
   );
 };
