@@ -64,7 +64,16 @@ const Navbar = () => {
             to="/sessions"
             className="md:hidden text-xs font-medium text-slate-600
           hover:text-primary flex items-center gap-1"
-          ></Link>
+          >
+            <HistoryIcon className="w-4 h-4" />
+            Sessions
+          </Link>
+          <span
+            className="font-medium hidden sm:inline tracking-wide text-sm
+          text-slate-700"
+          >
+            welcome, {userName}
+          </span>
         </div>
       )}
     </header>
