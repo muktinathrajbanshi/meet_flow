@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { dummyUser } from "../assets/asset";
+import { HistoryIcon, LayoutDashboardIcon } from "lucide-react";
 
 const Navbar = () => {
   const { isSignedIn, user } = { user: dummyUser, isSignedIn: true };
@@ -30,7 +31,19 @@ const Navbar = () => {
               to="/dashboard"
               className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 
             ${location.pathname === "/dashboard" ? "ring ring-blue-100 bg-blue-50 text-slate-800" : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"}`}
-            ></Link>
+            >
+              <LayoutDashboardIcon className="w-3.5 h-3.5" />
+              Dashboard
+            </Link>
+
+            <Link
+              to="/sessions"
+              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 
+            ${location.pathname === "/sessions" ? "ring ring-blue-100 bg-blue-50 text-slate-800" : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"}`}
+            >
+              <HistoryIcon className="w-3.5 h-3.5" />
+              Sessions
+            </Link>
           </nav>
         )}
       </div>
