@@ -23,6 +23,16 @@ const Navbar = () => {
             MeetUp<span className="text-primary">.</span>
           </span>
         </Link>
+
+        {isSignedIn && (
+          <nav className="hidden md:flex items-center gap-1.5 ml-2">
+            <Link
+              to="/dashboard"
+              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 
+            ${location.pathname === "/dashboard" ? "ring ring-blue-100 bg-blue-50 text-slate-800" : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"}`}
+            ></Link>
+          </nav>
+        )}
       </div>
 
       {/* Right Profile / UserButton  */}
