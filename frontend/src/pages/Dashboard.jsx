@@ -7,9 +7,21 @@ const Dashboard = () => {
         {/* Left Column - Actions  */}
         <div className="lg:col-span-7 space-y-8">
           <div className="space-y-3">
-            <div>
+            <div
+              className="inline-flex items-center gap-2 px-3.5 pr-6 py-2 rounded-full bg-white/25
+            text-xs font-medium"
+            >
               <ShieldCheckIcon size={16} />
+              Secure Peer-to-Peer Encryption
             </div>
+            <h1>
+              High quality video calls. <br />
+              <span className="text-primary">Built for everyone.</span>
+            </h1>
+            <p className="text-slate-700 text-base sm:text-lg max-w-xl leading-relaxed">
+              connect, collaborate, and celebrate from anywhere with ultra-low
+              latency video, screen sharing, and real-time chat.
+            </p>
           </div>
         </div>
 
