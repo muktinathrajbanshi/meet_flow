@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { dummyUser } from "../assets/asset";
 import { AstroidIcon, HistoryIcon, LayoutDashboardIcon } from "lucide-react";
+import { UserButton } from "@clerk/react";
 
 const Navbar = () => {
   const { isSignedIn, user } = { user: dummyUser, isSignedIn: true };
@@ -74,6 +75,8 @@ const Navbar = () => {
           >
             welcome, {userName}
           </span>
+
+          <UserButton afterSignOutUrl="/login" />
         </div>
       )}
     </header>
