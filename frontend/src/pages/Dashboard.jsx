@@ -1,6 +1,22 @@
-import { ShieldCheckIcon } from "lucide-react";
+import { PlusIcon, ShieldCheckIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import { dummyStats, dummyUser } from "../assets/asset";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const user = dummyUser;
+  const userName = user.fullName;
+  const userEmail = user.primaryEmailAddress.emailAddress;
+  const navigate = useNavigate();
+  const [isCreating, setIsCreating] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const stats = dummyStats;
+
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="flex-1 max-w-7xl w-full mx-auto p-6 md:p-12 flex flex-col justify-center">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -14,14 +30,21 @@ const Dashboard = () => {
               <ShieldCheckIcon size={16} />
               Secure Peer-to-Peer Encryption
             </div>
-            <h1>
+            <h1 className="text-4xl sm:text-5xl text-slate-800 leading-tight font-medium">
               High quality video calls. <br />
               <span className="text-primary">Built for everyone.</span>
             </h1>
             <p className="text-slate-700 text-base sm:text-lg max-w-xl leading-relaxed">
-              connect, collaborate, and celebrate from anywhere with ultra-low
+              Connect, collaborate, and celebrate from anywhere with ultra-low
               latency video, screen sharing, and real-time chat.
             </p>
+
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+              <button>
+                <PlusIcon className="w-5 h-5" />
+                <span></span>
+              </button>
+            </div>
           </div>
         </div>
 
