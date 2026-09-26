@@ -1,4 +1,4 @@
-import { PlusIcon, ShieldCheckIcon } from "lucide-react";
+import { KeyboardIcon, PlusIcon, ShieldCheckIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { dummyStats, dummyUser } from "../assets/asset";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,8 @@ const Dashboard = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
   const stats = dummyStats;
+
+  const [joinId, setJoinId] = useState("");
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -54,6 +56,25 @@ const Dashboard = () => {
                 <PlusIcon className="w-5 h-5" />
                 <span>{isCreating ? "Creating..." : "New Meeting"}</span>
               </button>
+
+              <form
+                onSubmit={handleJoinMeeting}
+                className="flex-1 flex items-center gap-2"
+              >
+                <div className="relative flex-1">
+                  <KeyboardIcon className="w-5 h-5 text-primary/90 absolute left-4 top-1/2 -translate-y-1/2" />
+
+                  <input
+                    type="text"
+                    placeholder="Enter meeting code (e.g. abc-def-ghi)"
+                    value={joinId}
+                    onChange={(e) => setJoinId(e.target.value)}
+                    className="w-full bg-white/75 border border-primary-border/80 focus:border-primary/60
+                  focus:ring-1 focus:ring-primary/60 rounded-full pl-12 pr-4 py-3.5 text-sm text-slate-800
+                  placeholder-slate-400 outline-none transition-all"
+                  />
+                </div>
+              </form>
             </div>
           </div>
         </div>
