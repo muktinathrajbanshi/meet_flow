@@ -17,6 +17,10 @@ const Dashboard = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const handleCreateMeeting = () => {};
+
+  const handleJoinMeeting = (e) => {};
+
   return (
     <div className="flex-1 max-w-7xl w-full mx-auto p-6 md:p-12 flex flex-col justify-center">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -40,9 +44,15 @@ const Dashboard = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-              <button>
+              <button
+                onClick={handleCreateMeeting}
+                disabled={isCreating}
+                className="bg-primary hover:bg-primary-hover text-white font-medium px-6
+              py-3.5 rounded-full shadow-md shadow-primary/20 flex items-center justify-center gap-2.5
+              transition-all cursor-pointer disabled:opacity-50"
+              >
                 <PlusIcon className="w-5 h-5" />
-                <span></span>
+                <span>{isCreating ? "Creating..." : "New Meeting"}</span>
               </button>
             </div>
           </div>
