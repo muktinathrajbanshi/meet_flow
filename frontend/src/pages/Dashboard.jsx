@@ -1,4 +1,9 @@
-import { KeyboardIcon, PlusIcon, ShieldCheckIcon } from "lucide-react";
+import {
+  ArrowRightIcon,
+  KeyboardIcon,
+  PlusIcon,
+  ShieldCheckIcon,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { dummyStats, dummyUser } from "../assets/asset";
 import { useNavigate } from "react-router-dom";
@@ -74,12 +79,48 @@ const Dashboard = () => {
                   placeholder-slate-400 outline-none transition-all"
                   />
                 </div>
+                <button
+                  type="submit"
+                  disabled={!joinId.trim()}
+                  className="bg-slate-900 hover:bg-slate-800 disabled:opacity-40 disabled:hover:bg-slate-900
+                text-white font-medium px-6 py-3.5 rounded-full transition-all flex items-center justify-center
+                cursor-pointer shadow-xs"
+                >
+                  <span>Join</span>
+                  <ArrowRightIcon className="w-4 h-4 ml-1.5" />
+                </button>
               </form>
             </div>
           </div>
         </div>
 
         {/* Right Column - Hero Graphic & Clock Card  */}
+        <div className="lg:col-span-5 flex flex-col items-center justify-center space-y-4">
+          <div
+            className="w-full bg-white/25 backdrop-blur rounded-4xl p-8 border border-slate-200
+          text-center space-y-6 relative overflow-hidden"
+          >
+            <div className="space-y-1">
+              <p className="mb-5 text-xl text-left">
+                Hi, <span>{userName}</span>
+              </p>
+              <h2 className="text-4xl xl:text-7xl my-4 text-slate-900 tracking-wide">
+                {currentTime.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </h2>
+              <p className="font-medium tracking-wider text-primary">
+                {currentTime.toLocaleDateString(undefined, {
+                  weekday: "long",
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
