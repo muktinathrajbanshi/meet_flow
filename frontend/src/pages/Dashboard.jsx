@@ -7,6 +7,7 @@ import {
 import { useEffect, useState } from "react";
 import { dummyStats, dummyUser } from "../assets/asset";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
   const user = dummyUser;
@@ -24,7 +25,22 @@ const Dashboard = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const handleCreateMeeting = () => {};
+  const handleCreateMeeting = () => {
+    setIsCreating(true);
+    const chars = "abcdefghijklmnopqrstuvwxyz";
+    const seg = () =>
+      Array.from(
+        { length: 3 },
+        () => chars[Math.floor(Math.random() * chars.length)],
+      ).join("");
+    const newMeetingId = `${seg()}-${seg()}-${seg()}`;
+
+    setTimeout(() => {
+      setIsCreating(false);
+      toast.success("Meeting created!");
+      navigate(`/meeting/${newMeetingId}`);
+    }, 400);
+  };
 
   const handleJoinMeeting = (e) => {};
 
@@ -118,6 +134,37 @@ const Dashboard = () => {
                   year: "numeric",
                 })}
               </p>
+            </div>
+
+            <div className="pt-4 border-t border-white/30 text-sm text-slate-600">
+              <div className="flex items-center justify-between py-6 px-4">
+                <p>
+                  Logged in as:{" "}
+                  <span className="text-slate-900">{userEmail}</span>
+                </p>
+                <span
+                  className={`px-4 py-1 rounded-full font-semibold text-xs uppercase 
+                  ${
+                    stats?.plan === "premium"
+                      ? "bg-blue-700 text-white"
+                      : "bg-white/70 text-slate-800"
+                  }`}
+                >
+                  {stats.plan || "Free"}
+                </span>
+              </div>
+              {stats && (
+                <div className="w-full bg-white/50 rounded-2xl px-5 py-4 border border-slate-100">
+                  <div className="flex items-center justify-between text-sm">
+                    <span>Monthly Meetings</span>
+                    <span className="text-xs text-slate-600 font-mono">
+                      {stats.monthlyLimit
+                        ? `${stats.monthlyCount} / ${stats.monthlyLimit} Used`
+                        : `${stats.monthlyCount} Created (Unlimited)`}
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
