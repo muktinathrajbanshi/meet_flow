@@ -37,6 +37,17 @@ const MeetingRoom = () => {
           <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
         </div>
       </header>
+
+      {/* Main Content Area (Video Grid + Side Panels)  */}
+      <div className="flex-1 flex overflow-hidden relative">
+        {/* Video Grid Center  */}
+
+        {/* In-Meeting Chat Drawer  */}
+
+        {/* Participants Drawer  */}
+
+        {/* Bottom Floating Control Bar  */}
+      </div>
     </div>
   );
 };
