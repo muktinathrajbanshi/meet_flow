@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { dummyRemoteParticipants } from "../assets/asset";
+import toast from "react-hot-toast";
 
 const useWebRTC = (_roomId, user, onMeetingEnded, _enabled = true) => {
   const [localStream, setLocalStream] = useState(null);
@@ -38,16 +39,18 @@ const useWebRTC = (_roomId, user, onMeetingEnded, _enabled = true) => {
   }, [initLocalStream]);
 
   // Toggle local mic
-  const toggleAudio = !audioEnabled;
-  setAudioEnabled(newState);
-  if (localStreamRef.current) {
-    const audioTrack = localStreamRef.current.getAudioTracks()[0];
+  const toggleAudio = () => {
+    const newState = !audioEnabled;
+    setAudioEnabled(newState);
+    if (localStreamRef.current) {
+      const audioTrack = localStreamRef.current.getAudioTracks()[0];
 
-    if (audioTrack) audioTrack.enabled = newState;
-  }
-  toast(newState ? "Microphone turned on" : "Microphone muted", {
-    icon: newState ? "🎙️" : "🔇",
-  });
+      if (audioTrack) audioTrack.enabled = newState;
+    }
+    toast(newState ? "Microphone turned on" : "Microphone muted", {
+      icon: newState ? "🎙️" : "🔇",
+    });
+  };
 
   return <div></div>;
 };
