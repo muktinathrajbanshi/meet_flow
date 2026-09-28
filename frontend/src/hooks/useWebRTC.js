@@ -37,6 +37,18 @@ const useWebRTC = (_roomId, user, onMeetingEnded, _enabled = true) => {
     };
   }, [initLocalStream]);
 
+  // Toggle local mic
+  const toggleAudio = !audioEnabled;
+  setAudioEnabled(newState);
+  if (localStreamRef.current) {
+    const audioTrack = localStreamRef.current.getAudioTracks()[0];
+
+    if (audioTrack) audioTrack.enabled = newState;
+  }
+  toast(newState ? "Microphone turned on" : "Microphone muted", {
+    icon: newState ? "🎙️" : "🔇",
+  });
+
   return <div></div>;
 };
 
