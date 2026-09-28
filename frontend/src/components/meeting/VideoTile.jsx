@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import UserIcon from "lucide-react";
 
 const VideoTile = ({
   stream,
@@ -28,6 +29,17 @@ const VideoTile = ({
         muted={isLocal}
         className={`w-full h-full object-cover transition-opacity duration-300 ${videoEnabled ? "opacity-100" : "opacity-0 pointer-events-none absolute"} ${isLocal ? "-scale-x-100" : ""}`}
       />
+      {/* Camera Off Placeholder */}
+      {!videoEnabled && (
+        <div className="flex flex-col items-center justify-center space-y-3 z-10">
+          <div
+            className="w-20 h-20 rounded-full bg-indigo-600/20 border-2 border-indigo-400/40
+          flex items-center justify-center text-indigo-300 text-2xl font-bold uppercase shadow-inner"
+          >
+            {name ? name.charAt(0) : <UserIcon className="w-8 h-8" />}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
