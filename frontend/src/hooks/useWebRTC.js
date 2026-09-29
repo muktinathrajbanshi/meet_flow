@@ -51,8 +51,25 @@ const useWebRTC = (_roomId, user, onMeetingEnded, _enabled = true) => {
       icon: newState ? "🎙️" : "🔇",
     });
   };
+  // Toggle local camera
+  const toggleVideo = () => {
+    const newState = !videoEnabled;
+    setVideoEnabled(newState);
+    if (localStreamRef.current) {
+      const videoTrack = localStreamRef.current.getVideoTracks()[0];
+      if (videoTrack) videoTrack.enabled = newState;
+    }
+  };
 
-  return <div></div>;
+  return {
+    localStream,
+    remoteUsers,
+    audioEnabled,
+    videoEnabled,
+    toggleAudio,
+    toggleVideo,
+    endMeeting,
+  };
 };
 
 export default useWebRTC;
