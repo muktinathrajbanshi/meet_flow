@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { dummyMeetingDetails, dummyUser } from "../assets/asset";
 import { useCallback, useState } from "react";
 import VideoGrid from "../components/meeting/videoGrid";
+import useWebRTC from "../hooks/useWebRTC";
 
 const MeetingRoom = () => {
   const { meetingId } = useParams();
@@ -13,6 +14,17 @@ const MeetingRoom = () => {
   const handleMeetingEnded = useCallback(() => {
     navigate("/dashboard");
   }, [navigate]);
+
+  // Initialize WebRTC
+  const {
+    localStream,
+    remoteUsers,
+    audioEnabled,
+    videoEnabled,
+    toggleAudio,
+    toggleVideo,
+    endMeeting,
+  } = useWebRTC(meetingId, userdata, handleMeetingEnded);
 
   const isHost = true;
 
