@@ -70,6 +70,12 @@ const useWebRTC = (_roomId, user, onMeetingEnded, _enabled = true) => {
     }
   }, [onMeetingEnded]);
 
+  useEffect(() => {
+    return () => {
+      endMeeting();
+    };
+  }, [endMeeting]);
+
   return {
     localStream,
     remoteUsers,

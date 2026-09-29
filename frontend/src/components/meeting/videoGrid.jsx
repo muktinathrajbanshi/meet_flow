@@ -32,7 +32,6 @@ const VideoGrid = ({
           audioEnabled={audioEnabled}
         />
         videoEnabled={videoEnabled}
-        // Remote Users Tiles
         {remoteUsers.map((remote) => (
           <VideoTile
             key={remote.socketId}
