@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import UserIcon, { MicOffIcon, VideoOffIcon } from "lucide-react";
+import { MicOffIcon, UserIcon, VideoOffIcon } from "lucide-react";
 
 const VideoTile = ({
   stream,
