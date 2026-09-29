@@ -59,6 +59,9 @@ const useWebRTC = (_roomId, user, onMeetingEnded, _enabled = true) => {
       const videoTrack = localStreamRef.current.getVideoTracks()[0];
       if (videoTrack) videoTrack.enabled = newState;
     }
+    toast(newState ? "Camera turned on" : "Camera turned off", {
+      icon: newState ? "📸" : "📷",
+    });
   };
 
   return {
