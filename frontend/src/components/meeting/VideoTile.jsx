@@ -47,6 +47,16 @@ const VideoTile = ({
           </span>
         </div>
       )}
+
+      {/* Bottom Info Bar Overlay  */}
+      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between z-20 pointer-events-none">
+        <div
+          className="flex items-center gap-2 bg-slate-900/80 backdrop-blur-md px-3 py-1.t rounded-xl
+        border border-white/20 text-xs font-medium text-white shadow-md"
+        >
+          <span></span>
+        </div>
+      </div>
     </div>
   );
 };
