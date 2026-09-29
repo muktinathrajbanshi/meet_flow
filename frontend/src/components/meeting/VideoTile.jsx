@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import UserIcon, { VideoOffIcon } from "lucide-react";
+import UserIcon, { MicOffIcon, VideoOffIcon } from "lucide-react";
 
 const VideoTile = ({
   stream,
@@ -54,7 +54,14 @@ const VideoTile = ({
           className="flex items-center gap-2 bg-slate-900/80 backdrop-blur-md px-3 py-1.t rounded-xl
         border border-white/20 text-xs font-medium text-white shadow-md"
         >
-          <span></span>
+          <span>
+            {name} {isLocal ? "(you)" : ""}
+          </span>
+          {!audioEnabled && (
+            <span className="p-0.5 rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/40">
+              <MicOffIcon className="w-3 h-3" />
+            </span>
+          )}
         </div>
       </div>
     </div>
