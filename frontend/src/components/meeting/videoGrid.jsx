@@ -1,3 +1,5 @@
+import VideoTile from "./VideoTile";
+
 const videoGrid = ({
   localStream,
   localUser,
@@ -21,7 +23,20 @@ const videoGrid = ({
     <div className="flex-1 w-full flex items-center justify-center p-4 overflow-y-auto">
       <div
         className={`w-full grid gap-4 ${getGridClass()} aspect-video max-h-[calc(100vh-140px)] transition-all duration-300`}
-      ></div>
+      >
+        {/* Local User Title  */}
+        <VideoTile stream={localStream}
+        name={localUser?VideoTile.name || "You"}
+        isLocal={true}
+        audioEnabled={audioEnabled} />
+        videoEnabled={videoEnabled}
+
+        // Remote Users Tiles 
+        {remoteUsers.map((remote) => (
+          <VideoTile key={remote.socketId} stream={remote.stream} name={remote.userName}/>
+        ))}
+        
+      </div>
     </div>
   );
 };
