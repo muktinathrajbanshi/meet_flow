@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { dummyMeetingDetails, dummyUser } from "../assets/asset";
 import { useCallback, useState } from "react";
+import VideoGrid from "../components/meeting/videoGrid";
 
 const MeetingRoom = () => {
   const { meetingId } = useParams();
@@ -41,6 +42,13 @@ const MeetingRoom = () => {
       {/* Main Content Area (Video Grid + Side Panels)  */}
       <div className="flex-1 flex overflow-hidden relative">
         {/* Video Grid Center  */}
+        <VideoGrid
+          localStream={localStream}
+          localUser={userdata}
+          remoteUsers={remoteUsers}
+          audioEnabled={audioEnabled}
+          videoEnabled={videoEnabled}
+        />
 
         {/* In-Meeting Chat Drawer  */}
 
