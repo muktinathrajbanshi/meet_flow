@@ -63,6 +63,12 @@ const useWebRTC = (_roomId, user, onMeetingEnded, _enabled = true) => {
       icon: newState ? "📸" : "📷",
     });
   };
+  // End meeting for everyone
+  const endMeeting = useCallback(() => {
+    if (onMeetingEnded) {
+      onMeetingEnded("Meeting ended");
+    }
+  }, [onMeetingEnded]);
 
   return {
     localStream,
