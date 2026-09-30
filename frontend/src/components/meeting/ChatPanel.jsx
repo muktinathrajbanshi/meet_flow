@@ -26,7 +26,9 @@ const ChatPanel = ({
 
   if (!isOpen) return null;
 
-  return <div></div>;
+  return (
+    <aside className="w-full sm:w-80 h-full bg-white border-l border-slate-200 flex"></aside>
+  );
 };
 
 export default ChatPanel;
