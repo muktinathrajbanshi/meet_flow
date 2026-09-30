@@ -12,17 +12,19 @@ const ChatPanel = ({
 
   useEffect(() => {
     if (isOpen) {
-        messagesEndRef.current?.scrollintoView({behavior: "smooth"})
+      messagesEndRef.current?.scrollintoView({ behavior: "smooth" });
     }
   }, [messages, isOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(text.trim(){
-        onSendMessage(text)
-        setText("")
-    })
-  }
+    if (text.trim()) {
+      onSendMessage(text);
+      setText("");
+    }
+  };
+
+  if (!isOpen) return null;
 
   return <div></div>;
 };
