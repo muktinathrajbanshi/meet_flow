@@ -20,7 +20,14 @@ export const useChat = (_roomId, user) => {
           minute: "2-digit",
         }),
       };
+      setMessages((prev) => [...prev, message]);
     },
     [user],
   );
+
+  const toggleChat = useCallback(() => {
+    setIsChatOpen((prev) => {
+      if (!prev) setUnreadCount(0);
+    });
+  }, []);
 };
