@@ -30,8 +30,8 @@ const VideoGrid = ({
           name={localUser?.name || "You"}
           isLocal={true}
           audioEnabled={audioEnabled}
+          videoEnabled={videoEnabled}
         />
-        videoEnabled={videoEnabled}
         {remoteUsers.map((remote) => (
           <VideoTile
             key={remote.socketId}
