@@ -10,7 +10,19 @@ const ChatPanel = ({
   const [text, setText] = useState("");
   const messagesEndRef = useRef(null);
 
-  useEffect(() => {}, [messages, isOpen]);
+  useEffect(() => {
+    if (isOpen) {
+        messagesEndRef.current?.scrollintoView({behavior: "smooth"})
+    }
+  }, [messages, isOpen]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(text.trim(){
+        onSendMessage(text)
+        setText("")
+    })
+  }
 
   return <div></div>;
 };
