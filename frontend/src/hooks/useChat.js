@@ -28,6 +28,15 @@ export const useChat = (_roomId, user) => {
   const toggleChat = useCallback(() => {
     setIsChatOpen((prev) => {
       if (!prev) setUnreadCount(0);
+      return !prev;
     });
   }, []);
+
+  return {
+    messages,
+    sendMessage,
+    unreadCount,
+    isChatOpen,
+    toggleChat,
+  };
 };
