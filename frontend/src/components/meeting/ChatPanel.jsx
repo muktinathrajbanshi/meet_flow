@@ -27,7 +27,10 @@ const ChatPanel = ({
   if (!isOpen) return null;
 
   return (
-    <aside className="w-full sm:w-80 h-full bg-white border-l border-slate-200 flex"></aside>
+    <aside
+      className="w-full sm:w-80 h-full bg-white border-l border-slate-200 flex 
+    flex-col z-30 shadow-2xl animate-in slide-in-from-right duration-200"
+    ></aside>
   );
 };
 
