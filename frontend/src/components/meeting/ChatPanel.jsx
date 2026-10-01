@@ -90,7 +90,15 @@ const ChatPanel = ({
         onSubmit={handleSubmit}
         className="p-3 border-t border-slate-200 bg-slate-50 flex items-center gap-2"
       >
-        <input type="text" placeholder="Type a message..." />
+        <input
+          type="text"
+          placeholder="Type a message..."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          className="flex-1 bg-white border border-primary-border/80 focus:border-primary
+          rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 outline-none
+          transition-all shadow-xs"
+        />
       </form>
     </aside>
   );
