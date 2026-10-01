@@ -35,10 +35,27 @@ const ChatPanel = ({
       {/* Header  */}
       <div className="p-4 border-b border-slate-200 flex items-center justify-between">
         <h3>In-Meeting Chat</h3>
-        <button>
+        <button onClick={onClose} className="p-1.5 rounded-xl hover:bg-slate-100 text-slate-500
+        hover:text-slate-900 transition-colors cursor-pointer">
           <XIcon className="w-5 h-5" />
         </button>
       </div>
+
+      {/* Message Container  */}
+      <div className="flex-1 p-4 overflow-y-auto space-y-4">
+        {messages.length === 0 ? (
+          <div className="h-full flex flex-col items-center justify-center text-center
+          text-slate-400 text-sm">
+            <p>No messages yet.</p>
+            <p className="text-xs mt-1 text-slate-400">Send a message to start chatting with participants!</p>
+          </div>
+        )}
+      </div>
+
+      {/* Send Form  */}
+      <form action="">
+
+      </form>
     </aside>
   );
 };
