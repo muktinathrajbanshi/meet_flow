@@ -70,14 +70,28 @@ const ChatPanel = ({
                   </span>
                   <span className="text-[10px] text-slate-400">{msg.time}</span>
                 </div>
+
+                <div
+                  className={`px-3.5 py-2.5 rounded-2xl max-w-[85%] text-sm leading-relaxed shadow-xs ${isMe} 
+                ? "bg-primary text-white rounded-tr-none font-medium"
+                : "bg-slate-100 text-slate-800 rounded-tl-none border border-slate-200 font-medium"`}
+                >
+                  {msg.text}
+                </div>
               </div>
             );
           })
         )}
+        <div ref={messagesEndRef} />
       </div>
 
       {/* Send Form  */}
-      <form action=""></form>
+      <form
+        onSubmit={handleSubmit}
+        className="p-3 border-t border-slate-200 bg-slate-50 flex items-center gap-2"
+      >
+        <input type="text" placeholder="Type a message..." />
+      </form>
     </aside>
   );
 };
