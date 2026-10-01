@@ -1,3 +1,4 @@
+import { XIcon } from "lucide-react";
 import { useEffect } from "react";
 
 const ChatPanel = ({
@@ -30,7 +31,15 @@ const ChatPanel = ({
     <aside
       className="w-full sm:w-80 h-full bg-white border-l border-slate-200 flex 
     flex-col z-30 shadow-2xl animate-in slide-in-from-right duration-200"
-    ></aside>
+    >
+      {/* Header  */}
+      <div className="p-4 border-b border-slate-200 flex items-center justify-between">
+        <h3>In-Meeting Chat</h3>
+        <button>
+          <XIcon className="w-5 h-5" />
+        </button>
+      </div>
+    </aside>
   );
 };
 
