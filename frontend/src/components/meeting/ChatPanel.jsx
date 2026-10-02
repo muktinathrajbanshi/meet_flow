@@ -99,6 +99,12 @@ const ChatPanel = ({
           rounded-xl px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 outline-none
           transition-all shadow-xs"
         />
+        <button
+          type="submit"
+          disabled={!text.trim()}
+          className="p-2.5 rounded-xl bg-primary hover:bg-primary-hover text-white disabled:opacity-40
+        transition-all cursor-pointer shadow-xs"
+        ></button>
       </form>
     </aside>
   );
