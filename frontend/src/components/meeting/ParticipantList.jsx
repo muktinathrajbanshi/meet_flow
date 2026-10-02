@@ -37,6 +37,21 @@ const ParticipantList = ({
           <XIcon className="w-5 h-5" />
         </button>
       </div>
+
+      {/* List  */}
+      <div className="flex-1 p-4 overflow-y-auto space-y-3">
+        {allParticipants.map((p) => {
+          const isHost = meetingHostId && p.userId === meetingHostId;
+
+          return (
+            <div
+              key={p.socketId}
+              className="flex items-center justify-between p-3 rounded-2xl
+                    bg-slate-50 border border-slate-200 shadow-xs"
+            ></div>
+          );
+        })}
+      </div>
     </aside>
   );
 };
