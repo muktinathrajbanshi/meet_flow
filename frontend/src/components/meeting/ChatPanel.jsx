@@ -1,5 +1,5 @@
-import { XIcon } from "lucide-react";
-import { useEffect } from "react";
+import { SendIcon, XIcon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const ChatPanel = ({
   isOpen,
@@ -104,7 +104,9 @@ const ChatPanel = ({
           disabled={!text.trim()}
           className="p-2.5 rounded-xl bg-primary hover:bg-primary-hover text-white disabled:opacity-40
         transition-all cursor-pointer shadow-xs"
-        ></button>
+        >
+          <SendIcon className="w-4 h-4" />
+        </button>
       </form>
     </aside>
   );
