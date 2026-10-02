@@ -13,7 +13,7 @@ const ChatPanel = ({
 
   useEffect(() => {
     if (isOpen) {
-      messagesEndRef.current?.scrollintoView({ behavior: "smooth" });
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages, isOpen]);
 
