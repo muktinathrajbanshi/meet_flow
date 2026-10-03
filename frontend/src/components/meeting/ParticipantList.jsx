@@ -1,3 +1,5 @@
+import { CrownIcon } from "lucide-react";
+
 const ParticipantList = ({
   isOpen,
   onClose,
@@ -48,7 +50,26 @@ const ParticipantList = ({
               key={p.socketId}
               className="flex items-center justify-between p-3 rounded-2xl
                     bg-slate-50 border border-slate-200 shadow-xs"
-            ></div>
+            >
+              <div
+                className="w-9 h-9 rounded-full bg-primary-light border
+                      border-primary-border text-primary font-bold flex items-center
+                      justify-center text-sm shadow-xs"
+              >
+                {p.userName.charAt(0).toUpperCase()}
+              </div>
+              <div className="flex flex-col">
+                <span className="flex-sm font-medium text-slate-800 flex items-center gap-1.5">
+                  {p.userName}
+                  {isHost && (
+                    <CrownIcon
+                      className="w-3.5 h-3.5 text-amber-500"
+                      title="Host"
+                    />
+                  )}
+                </span>
+              </div>
+            </div>
           );
         })}
       </div>
