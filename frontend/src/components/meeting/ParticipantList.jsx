@@ -4,6 +4,7 @@ import {
   MicOffIcon,
   VideoIcon,
   VideoOffIcon,
+  XIcon,
 } from "lucide-react";
 
 const ParticipantList = ({
