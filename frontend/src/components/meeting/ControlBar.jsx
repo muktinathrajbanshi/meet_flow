@@ -1,4 +1,11 @@
-import { CheckIcon, CopyIcon, MicIcon, MicOffIcon } from "lucide-react";
+import {
+  CheckIcon,
+  CopyIcon,
+  MicIcon,
+  MicOffIcon,
+  VideoIcon,
+  VideoOffIcon,
+} from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -62,7 +69,7 @@ const ControlBar = ({
           onClick={onToggleAudio}
           className={`p-3.5 rounded-2xl transition-all cursor-pointer border ${
             audioEnabled
-              ? "bg-slate-100 hover:bg-slate-200 text-slate-800border-slate-300 shadow-xs"
+              ? "bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-300 shadow-xs"
               : "bg-rose-50 hover:bg-rose-100 text-rose-600 border-rose-200 shadow-xs"
           }`}
           title={audioEnabled ? "Mute Microphone" : "Unmute Microphone"}
@@ -74,6 +81,21 @@ const ControlBar = ({
           )}
         </button>
         {/* Video Toggle  */}
+        <button
+          onClick={onToggleVideo}
+          className={`p-3.5 rounded-2xl transition-all cursor-pointer border ${
+            videoEnabled
+              ? "bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-300 shadow-xs"
+              : "bg-rose-50 hover:bg-rose-100 text-rose-600 border-rose-200 shadow-xs"
+          }`}
+          title={videoEnabled ? "Turn Off Camera" : "Turn On Camera"}
+        >
+          {videoEnabled ? (
+            <VideoIcon className="w-5 h-5" />
+          ) : (
+            <VideoOffIcon className="w-5 h-5" />
+          )}
+        </button>
 
         {/* Chat Toggle  */}
 
