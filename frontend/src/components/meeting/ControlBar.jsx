@@ -1,4 +1,4 @@
-import { CheckIcon, CopyIcon } from "lucide-react";
+import { CheckIcon, CopyIcon, MicIcon, MicOffIcon } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -56,6 +56,31 @@ const ControlBar = ({
       </div>
 
       {/* Center Controls  */}
+      <div className="flex items-center gap-3 mx-auto sm:mx-0">
+        {/* Audio Toggle  */}
+        <button
+          onClick={onToggleAudio}
+          className={`p-3.5 rounded-2xl transition-all cursor-pointer border ${
+            audioEnabled
+              ? "bg-slate-100 hover:bg-slate-200 text-slate-800border-slate-300 shadow-xs"
+              : "bg-rose-50 hover:bg-rose-100 text-rose-600 border-rose-200 shadow-xs"
+          }`}
+          title={audioEnabled ? "Mute Microphone" : "Unmute Microphone"}
+        >
+          {audioEnabled ? (
+            <MicIcon className="w-5 h-5" />
+          ) : (
+            <MicOffIcon className="w-5 h-5" />
+          )}
+        </button>
+        {/* Video Toggle  */}
+
+        {/* Chat Toggle  */}
+
+        {/* Participants Toggle  */}
+
+        {/* Leave / End Meeting Button  */}
+      </div>
 
       {/* Right placeholder  */}
     </footer>
