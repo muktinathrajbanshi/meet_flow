@@ -12,7 +12,7 @@ const MeetingRoom = () => {
   const navigate = useNavigate();
   const userdata = dummyUser;
 
-  const [isParticipantsOpen, setIsParticipantsOpen] = useState(true);
+  const [isParticipantsOpen, setIsParticipantsOpen] = useState(false);
 
   const handleMeetingEnded = useCallback(() => {
     navigate("/dashboard");
