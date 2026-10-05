@@ -101,6 +101,11 @@ const MeetingRoom = () => {
           onToggleParticipants={() => setIsParticipantsOpen((prev) => !prev)}
           isChatOpen={isChatOpen}
           isParticipantsOpen={isParticipantsOpen}
+          unreadCount={unreadCount}
+          participantCount={1 + remoteUsers.length}
+          isHost={isHost}
+          onLeave={handleLeave}
+          onEndMeeting={handleEndMeeting}
         />
       </div>
     </div>
