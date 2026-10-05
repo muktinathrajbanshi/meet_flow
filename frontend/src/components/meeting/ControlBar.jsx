@@ -167,6 +167,9 @@ const ControlBar = ({
       </div>
 
       {/* Right placeholder  */}
+      <div className="hidden sm:block w-32 text-right">
+        <span className="font-medium text-slate-400">MeetUp Room</span>
+      </div>
     </footer>
   );
 };
