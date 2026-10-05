@@ -7,6 +7,7 @@ import {
   VideoOffIcon,
   MessageSquareIcon,
   UsersIcon,
+  PhoneOffIcon,
 } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -137,11 +138,32 @@ const ControlBar = ({
             className="absolute -top-1 -right-1 bg-slate-200 text-slate-800 text-[10px] font-bold
             px-1.5 py-0.5 rounded-full border border-slate-300"
           >
-            {unreadCount}
+            {participantCount}
           </span>
         </button>
 
         {/* Leave / End Meeting Button  */}
+        {isHost ? (
+          <button
+            onClick={onEndMeeting}
+            className="p-3.5 rounded-2xl bg-red-600 hover:bg-red-700 text-white
+          shadow-lg shadow-red-500/25 transition-all cursor-pointer border
+          border-red-500 ml-2 font-medium text-xs flex items-center gap-1.5"
+          >
+            <PhoneOffIcon className="w-5 h-5" />
+            <span className="hidden md:inline">End Meeting</span>
+          </button>
+        ) : (
+          <button
+            onClick={onLeave}
+            className="p-3.5 rounded-2xl bg-red-600 hover:bg-red-700 text-white
+          shadow-lg shadow-red-500/25 transition-all cursor-pointer border
+          border-red-500 ml-2"
+            title="Leave Meeting"
+          >
+            <PhoneOffIcon className="w-5 h-5" />
+          </button>
+        )}
       </div>
 
       {/* Right placeholder  */}
