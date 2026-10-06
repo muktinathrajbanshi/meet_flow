@@ -7,6 +7,7 @@ import ChatPanel from "../components/meeting/ChatPanel";
 import { useChat } from "../hooks/useChat";
 import ParticipantList from "../components/meeting/ParticipantList";
 import ControlBar from "../components/meeting/ControlBar";
+import toast from "react-hot-toast";
 
 const MeetingRoom = () => {
   const { meetingId } = useParams();
@@ -36,9 +37,16 @@ const MeetingRoom = () => {
 
   const isHost = true;
 
-  const handleLeave = () => {};
+  const handleLeave = () => {
+    toast("You left the meeting");
+    navigate("/dashboard");
+  };
 
-  const handleEndMeeting = () => {};
+  const handleEndMeeting = () => {
+    endMeeting();
+    toast("Meeting ended for all participants");
+    navigate("/dashboard");
+  };
 
   return (
     <div
@@ -89,25 +97,24 @@ const MeetingRoom = () => {
           remoteUsers={remoteUsers}
           meetingHostId={dummyUser.id}
         />
-
-        {/* Bottom Floating Control Bar  */}
-        <ControlBar
-          roomId={meetingId || dummyMeetingDetails.meetingId}
-          audioEnabled={audioEnabled}
-          videoEnabled={videoEnabled}
-          onToggleAudio={toggleAudio}
-          onToggleVideo={toggleVideo}
-          onToggleChat={toggleChat}
-          onToggleParticipants={() => setIsParticipantsOpen((prev) => !prev)}
-          isChatOpen={isChatOpen}
-          isParticipantsOpen={isParticipantsOpen}
-          unreadCount={unreadCount}
-          participantCount={1 + remoteUsers.length}
-          isHost={isHost}
-          onLeave={handleLeave}
-          onEndMeeting={handleEndMeeting}
-        />
       </div>
+      {/* Bottom Floating Control Bar  */}
+      <ControlBar
+        roomId={meetingId || dummyMeetingDetails.meetingId}
+        audioEnabled={audioEnabled}
+        videoEnabled={videoEnabled}
+        onToggleAudio={toggleAudio}
+        onToggleVideo={toggleVideo}
+        onToggleChat={toggleChat}
+        onToggleParticipants={() => setIsParticipantsOpen((prev) => !prev)}
+        isChatOpen={isChatOpen}
+        isParticipantsOpen={isParticipantsOpen}
+        unreadCount={unreadCount}
+        participantCount={1 + remoteUsers.length}
+        isHost={isHost}
+        onLeave={handleLeave}
+        onEndMeeting={handleEndMeeting}
+      />
     </div>
   );
 };
