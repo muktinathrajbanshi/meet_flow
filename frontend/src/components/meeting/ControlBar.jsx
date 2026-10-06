@@ -125,7 +125,7 @@ const ControlBar = ({
         {/* Participants Toggle  */}
         <button
           onClick={onToggleParticipants}
-          className={`p-3.5 rounded-2xl transition-all cursor-pointer border ${
+          className={`relative p-3.5 rounded-2xl transition-all cursor-pointer border ${
             isParticipantsOpen
               ? "bg-primary text-white border-primary shadow-md shadow-primary/20"
               : "bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-300 shadow-xs"
