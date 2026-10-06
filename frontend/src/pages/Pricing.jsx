@@ -1,3 +1,5 @@
+import { PricingTable } from "@clerk/react";
+
 const Pricing = () => {
   return (
     <div
@@ -13,6 +15,7 @@ const Pricing = () => {
           MeetUp.
         </p>
       </div>
+      <PricingTable />
     </div>
   );
 };
