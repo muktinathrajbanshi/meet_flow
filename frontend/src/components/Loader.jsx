@@ -1,3 +1,5 @@
+import { VideoIcon } from "lucide-react";
+
 const Loader = ({ text = "Loading..." }) => {
   return (
     <div
@@ -9,7 +11,11 @@ const Loader = ({ text = "Loading..." }) => {
           className="w-16 h-16 rounded-full border-4 border-primary-light
         border-t-primary animate-spin"
         />
+        <VideoIcon className="w-6 h-6 text-primary absolute" />
       </div>
+      <p className="mt-4 text-sm font-semibold text-slate-600 animate-pulse">
+        {text}
+      </p>
     </div>
   );
 };
