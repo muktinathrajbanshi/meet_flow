@@ -3,11 +3,21 @@ import { ArrowLeftIcon } from "lucide-react";
 import { useState } from "react";
 import { dummySessions } from "../assets/asset";
 import EmptySessions from "../components/sessions/EmptySessions";
+import SessionCard from "../components/sessions/SessionCard";
 
 const Session = () => {
-  const [sessions] = useState([]);
+  const [sessions] = useState(dummySessions);
   const [selectedSession, setSelectedSession] = useState(null);
   const navigate = useNavigate();
+
+  const openSessionDetails = (sessionId) => {
+    const session = sessions.find(
+      (s) => s.id === sessionId || s.meetingId === sessionId,
+    );
+    if (session) {
+      setSelectedSession(session);
+    }
+  };
 
   return (
     <main className="flex-1 max-w-7xl w-full mx-auto p-6 md:p-12">
@@ -34,7 +44,14 @@ const Session = () => {
         <EmptySessions />
       ) : (
         <div>
-          <p>Session Card</p>
+          {sessions.map((session) => (
+            <SessionCard
+              key={session.id}
+              session={session}
+              onOpenDetails={openSessionDetails}
+              onRejoin={(meetingId) => navigate(`/meeting/${meetingId}`)}
+            />
+          ))}
         </div>
       )}
 
