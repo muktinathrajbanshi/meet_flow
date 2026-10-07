@@ -1,7 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "lucide-react";
+import { useState } from "react";
+import { dummySessions } from "../assets/asset";
+import EmptySessions from "../components/sessions/EmptySessions";
 
 const Session = () => {
+  const [sessions] = useState([]);
+  const [selectedSession, setSelectedSession] = useState(null);
+  const navigate = useNavigate();
+
   return (
     <main className="flex-1 max-w-7xl w-full mx-auto p-6 md:p-12">
       {/* Page Title & Navigation Header  */}
@@ -21,6 +28,18 @@ const Session = () => {
           chat transcripts.
         </p>
       </div>
+
+      {/* Sessions Grid / Empty State  */}
+      {sessions.length === 0 ? (
+        <EmptySessions />
+      ) : (
+        <div>
+          <p>Session Card</p>
+        </div>
+      )}
+
+      {/* Session Detail Modal  */}
+      <p>Session Detail Modal</p>
     </main>
   );
 };
