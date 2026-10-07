@@ -1,3 +1,5 @@
+import { CalendarIcon } from "lucide-react";
+
 const SessionCard = ({ session, onOpenDetails, onRejoin }) => {
   const isEnded = session.status === "ended";
 
@@ -18,9 +20,27 @@ const SessionCard = ({ session, onOpenDetails, onRejoin }) => {
             className={`text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1.5
             ${isEnded ? "bg-slate-500/5 text-slate-500" : "bg-emerland-500/5 text-emerland-500"}`}
           >
-            <span>{isEnded ? "Ended" : "Active"}</span>
+            <span
+              className={`size-1.25 rounded-full ${isEnded ? "bg-slate-400" : "bg-emerland-500"}`}
+            />
+            {isEnded ? "Ended" : "Active"}
           </span>
         </div>
+
+        <h3 className="text-xl font-medium text-slate-900 turncate">
+          {session.title || "Instant Meeting"}
+        </h3>
+
+        <p>
+          <CalendarIcon className="w-3.5 h-3.5 text-slate-400" />
+          {new Date(session.createdAt).toLocaleDateString(undefined, {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </p>
       </div>
     </div>
   );
