@@ -12,6 +12,15 @@ const Session = () => {
       >
         <ArrowLeftIcon size={14} /> Go to Dashboard
       </Link>
+      <div className="mb-8">
+        <h1 className="text-3xl font-medium tracking-tight text-slate-900">
+          Meeting sessions
+        </h1>
+        <p className="text-sm text-slate-500 mt-1">
+          Review your past and active meeting history, participant logs, and
+          chat transcripts.
+        </p>
+      </div>
     </main>
   );
 };
