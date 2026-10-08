@@ -1,4 +1,4 @@
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, UsersIcon } from "lucide-react";
 
 const SessionCard = ({ session, onOpenDetails, onRejoin }) => {
   const isEnded = session.status === "ended";
@@ -31,7 +31,7 @@ const SessionCard = ({ session, onOpenDetails, onRejoin }) => {
           {session.title || "Instant Meeting"}
         </h3>
 
-        <p>
+        <p className="text-xs text-slate-400 flex items-center gap-1.5">
           <CalendarIcon className="w-3.5 h-3.5 text-slate-400" />
           {new Date(session.createdAt).toLocaleDateString(undefined, {
             month: "short",
@@ -41,6 +41,19 @@ const SessionCard = ({ session, onOpenDetails, onRejoin }) => {
             minute: "2-digit",
           })}
         </p>
+      </div>
+
+      {/* Stats Row  */}
+      <div className="grid grid-cols-2 gap-3 pt-3 border-t border-slate-300/30">
+        <div className="flex items-center gap-2 text-xs bg-slate-500/5 p-2.5 rounded-xl">
+          <UsersIcon className="w-4 h-4 text-primary" />
+          <span>
+            <strong className="font-semibold text-slate-900">
+              {session.participants?.length || 0}
+            </strong>{" "}
+            Participants
+          </span>
+        </div>
       </div>
     </div>
   );
