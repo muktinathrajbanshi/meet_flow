@@ -4,6 +4,7 @@ import { useState } from "react";
 import { dummySessions } from "../assets/asset";
 import EmptySessions from "../components/sessions/EmptySessions";
 import SessionCard from "../components/sessions/SessionCard";
+import SessionDetailModal from "../components/sessions/SessionDetailModal";
 
 const Session = () => {
   const [sessions] = useState(dummySessions);
@@ -56,7 +57,10 @@ const Session = () => {
       )}
 
       {/* Session Detail Modal  */}
-      <p>Session Detail Modal</p>
+      <SessionDetailModal
+        session={selectedSession}
+        onClose={() => setSelectedSession(null)}
+      />
     </main>
   );
 };
