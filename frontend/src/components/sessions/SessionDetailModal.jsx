@@ -83,6 +83,9 @@ const SessionDetailModal = ({ session, onClose }) => {
         </div>
 
         {/* Tab Content  */}
+        <div className="flex-1 p-6 overflow-y-auto min-h-75">
+          {activeTab === "chat" ? <p>Chat list</p> : <p>Participants List</p>}
+        </div>
       </div>
     </div>
   );
