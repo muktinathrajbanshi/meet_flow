@@ -1,4 +1,4 @@
-import { CalendarIcon, UsersIcon } from "lucide-react";
+import { CalendarIcon, UsersIcon, MessageSquareIcon } from "lucide-react";
 
 const SessionCard = ({ session, onOpenDetails, onRejoin }) => {
   const isEnded = session.status === "ended";
@@ -18,16 +18,16 @@ const SessionCard = ({ session, onOpenDetails, onRejoin }) => {
           </span>
           <span
             className={`text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1.5
-            ${isEnded ? "bg-slate-500/5 text-slate-500" : "bg-emerland-500/5 text-emerland-500"}`}
+            ${isEnded ? "bg-slate-500/5 text-slate-500" : "bg-emerald-500/5 text-emerald-500"}`}
           >
             <span
-              className={`size-1.25 rounded-full ${isEnded ? "bg-slate-400" : "bg-emerland-500"}`}
+              className={`size-1.25 rounded-full ${isEnded ? "bg-slate-400" : "bg-emerald-500"}`}
             />
             {isEnded ? "Ended" : "Active"}
           </span>
         </div>
 
-        <h3 className="text-xl font-medium text-slate-900 turncate">
+        <h3 className="text-xl font-medium text-slate-900 truncate">
           {session.title || "Instant Meeting"}
         </h3>
 
@@ -54,6 +54,38 @@ const SessionCard = ({ session, onOpenDetails, onRejoin }) => {
             Participants
           </span>
         </div>
+
+        <div className="flex items-center gap-2 text-xs bg-slate-500/5 p-2.5 rounded-xl">
+          <MessageSquareIcon className="w-4 h-4 text-primary" />
+          <span>
+            <strong className="font-semibold text-slate-900">
+              {session.messages?.length || 0}
+            </strong>{" "}
+            Messages
+          </span>
+        </div>
+      </div>
+
+      {/* Actions  */}
+      <div className="flex items-center justify-between gap-3 pt-2">
+        <button
+          onClick={() => onOpenDetails(session.id)}
+          className="w-full bg-slate-400/10 hover:bg-slate-400/20 text-slate-800
+        font-medium py-2.5 px-4 rounded-full text-xs transition-all cursor-pointer
+        text-center"
+        >
+          View Details
+        </button>
+
+        {!isEnded && (
+          <button
+            onClick={() => onRejoin(session.meetingId)}
+            className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-2.5
+        px-4 rounded-full text-xs transition-all shadow-xs cursor-pointer text-center"
+          >
+            Re-join
+          </button>
+        )}
       </div>
     </div>
   );
