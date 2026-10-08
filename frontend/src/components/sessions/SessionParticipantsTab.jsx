@@ -1,4 +1,4 @@
-import { UserIcon } from "lucide-react";
+import { CrownIcon, UserIcon } from "lucide-react";
 
 const SessionParticipantsTab = ({ participants = [], host }) => {
   if (participants.length === 0) {
@@ -29,7 +29,37 @@ const SessionParticipantsTab = ({ participants = [], host }) => {
             key={idx}
             className="flex items-center justify-between p-3 rounded-2xl
             bg-slate-50 border border-slate-100"
-          ></div>
+          >
+            <div className="flex items-center gap-3">
+              <div
+                className="w-9 h-9 rounded-full bg-cyan-50 border border-cyan-200
+                text-primary font-bold flex items-center justify-center text-sm"
+              >
+                {p.name ? p.name.charAt(0).toUppercase() : "?"}
+              </div>
+              <div>
+                <span className="text-sm font-semibold text-slate-800 flex items-center gap-1.5">
+                  {p.name}
+                  {isHost && (
+                    <CrownIcon
+                      className="w-3.5 h-3.5 text-amber-500"
+                      title="Host"
+                    />
+                  )}
+                </span>
+                {p.user?.email && (
+                  <span className="text-xs text-slate-400">{p.user.email}</span>
+                )}
+              </div>
+            </div>
+            <span className="text-xs text-slate-500 font-mono">
+              Joined:{" "}
+              {new Date(p.joinedAt).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </span>
+          </div>
         );
       })}
     </div>
