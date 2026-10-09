@@ -35,7 +35,7 @@ const SessionParticipantsTab = ({ participants = [], host }) => {
                 className="w-9 h-9 rounded-full bg-cyan-50 border border-cyan-200
                 text-primary font-bold flex items-center justify-center text-sm"
               >
-                {p.name ? p.name.charAt(0).toUppercase() : "?"}
+                {p.name ? p.name.charAt(0).toUpperCase() : "?"}
               </div>
               <div>
                 <span className="text-sm font-semibold text-slate-800 flex items-center gap-1.5">
