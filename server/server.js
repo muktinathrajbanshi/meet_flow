@@ -2,14 +2,20 @@ import express from "express";
 import "dotenv/config";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { initDB } from "./config/db.js";
+import { clerkMiddleware } from "@clerk/express";
 
 const app = express();
+
+// Connect to Neon & Initialize Tables
+initDB();
 
 const allowedOrigins = process.env.ORIGINS.split(",");
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(cookieParser());
 
 app.use(express.json());
+app.use(clerkMiddleware());
 
 app.get("/", (req, res) => res.send("API is Live!"));
 

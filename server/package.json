@@ -12,6 +12,7 @@
   "description": "",
   "type": "module",
   "dependencies": {
+    "@clerk/express": "^2.1.77",
     "@neondatabase/serverless": "^1.2.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
