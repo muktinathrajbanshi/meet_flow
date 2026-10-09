@@ -54,5 +54,8 @@ export async function initDB() {
                 timestamp TIMESTAMPTZ DEFAULT NOW()
             );
         `;
-  } catch (error) {}
+  } catch (error) {
+    console.error("Error initializing database tables:", error);
+    throw error;
+  }
 }
