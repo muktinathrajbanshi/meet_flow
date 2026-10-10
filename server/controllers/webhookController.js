@@ -47,8 +47,22 @@ export const handleClerkWebhook = async (req, res) => {
         break;
       }
 
-      default:
+      case "user.deleted": {
+        const userId = data.id;
+        if (userId) {
+          await sql`DELETE FROM users WHERE id = ${userId}`;
+        }
         break;
+      }
+
+      default:
+        console.log(`Unhandled Clerk webhook event type: ${eventType}`);
     }
-  } catch (error) {}
+    return res.status(200).json({ success: true, eventType });
+  } catch (error) {
+    console.error("Error verifying Clerk webhook:", error.message || error);
+    return res.status(400).json({
+      error: "webhook verification failed: " + (error.message || error),
+    });
+  }
 };
