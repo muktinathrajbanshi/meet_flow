@@ -9,8 +9,7 @@ export const handleClerkWebhook = async (req, res) => {
     const data = evt.data;
 
     switch (eventType) {
-      case "user.created":
-      case "user.updated": {
+      case "user.created": {
         const userId = data.id;
         const primaryEmail = data.email_address?.[0]?.email_address || "";
         const name = `${data.first_name || "User"} ${data.last_name}`;
@@ -27,6 +26,25 @@ export const handleClerkWebhook = async (req, res) => {
             plan = EXCLUDED.plan,
             updated_at = NOW()
         `;
+        break;
+      }
+
+      case "user.updated": {
+        const userId = data.id;
+        const primaryEmail = data.email_address?.[0]?.email_address || "";
+        const name = `${data.first_name || "User"} ${data.last_name}`;
+        const image = data.image_url || "";
+
+        await sql`
+            INSERT INTO users (id, name, email, image)
+            VALUES (${userId}, ${name}, ${primaryEmail}, ${image})
+            ON CONFLICT (email) DO UPDATE SET
+            id = EXCLUDED.id,
+            name = EXCLUDED.name,
+            image = EXCLUDED.image,
+            updated_at = NOW()
+        `;
+        break;
       }
 
       default:
