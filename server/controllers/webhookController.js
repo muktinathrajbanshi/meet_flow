@@ -2,111 +2,81 @@ import { verifyWebhook } from "@clerk/express/webhooks";
 import { sql } from "../config/db.js";
 
 export const handleClerkWebhook = async (req, res) => {
-  // 1. Verify the Clerk webhook signature
-  let evt;
-
   try {
-    evt = await verifyWebhook(req);
-  } catch (error) {
-    console.error("Clerk webhook verification failed:", error);
-
-    return res.status(400).json({
-      error: "Webhook signature verification failed",
-    });
-  }
-
-  // 2. Process the verified event
-  try {
-    const { type: eventType, data } = evt;
-
-    console.log("Clerk event received:", eventType);
+    const evt = await verifyWebhook(req);
+    console.log("Webhook verified:", evt.type);
+    const eventType = evt.type;
+    const data = evt.data;
 
     switch (eventType) {
-      case "user.created":
-      case "user.updated": {
+      case "user.created": {
         const userId = data.id;
+        // const primaryEmail = data.email_address?.[0]?.email_address || "";
 
-        // Find the primary email address
         const primaryEmail =
           data.email_addresses?.find(
             (email) => email.id === data.primary_email_address_id,
-          )?.email_address || data.email_addresses?.[0]?.email_address;
+          )?.email_address ||
+          data.email_addresses?.[0]?.email_address ||
+          "";
 
-        if (!primaryEmail) {
-          throw new Error(`No email address found for Clerk user ${userId}`);
-        }
+        const name = `${data.first_name || "User"} ${data.last_name}`;
+        const image = data.image_url || "";
+        const plan = "free";
 
-        const name =
-          [data.first_name, data.last_name].filter(Boolean).join(" ") || "User";
+        await sql`
+            INSERT INTO users (id, name, email, image, plan)
+            VALUES (${userId}, ${name}, ${primaryEmail}, ${image}, ${plan})
+            ON CONFLICT (email) DO UPDATE SET
+            id = EXCLUDED.id,
+            name = EXCLUDED.name,
+            image = EXCLUDED.image,
+            plan = EXCLUDED.plan,
+            updated_at = NOW()
+        `;
+        break;
+      }
 
+      case "user.updated": {
+        const userId = data.id;
+        // const primaryEmail = data.email_address?.[0]?.email_address || "";
+
+        const primaryEmail =
+          data.email_addresses?.find(
+            (email) => email.id === data.primary_email_address_id,
+          )?.email_address ||
+          data.email_addresses?.[0]?.email_address ||
+          "";
+
+        const name = `${data.first_name || "User"} ${data.last_name}`;
         const image = data.image_url || "";
 
-        if (eventType === "user.created") {
-          // Insert new users; preserve the plan on repeated events.
-          await sql`
-            INSERT INTO users (id, name, email, image, plan)
-            VALUES (
-              ${userId},
-              ${name},
-              ${primaryEmail},
-              ${image},
-              'free'
-            )
-            ON CONFLICT (id) DO UPDATE SET
-              name = EXCLUDED.name,
-              email = EXCLUDED.email,
-              image = EXCLUDED.image,
-              updated_at = NOW()
-          `;
-        } else {
-          // Update an existing user, or create a missing record.
-          await sql`
+        await sql`
             INSERT INTO users (id, name, email, image)
-            VALUES (
-              ${userId},
-              ${name},
-              ${primaryEmail},
-              ${image}
-            )
-            ON CONFLICT (id) DO UPDATE SET
-              name = EXCLUDED.name,
-              email = EXCLUDED.email,
-              image = EXCLUDED.image,
-              updated_at = NOW()
-          `;
-        }
-
-        console.log(`Neon user sync successful: ${userId} (${eventType})`);
-
+            VALUES (${userId}, ${name}, ${primaryEmail}, ${image})
+            ON CONFLICT (email) DO UPDATE SET
+            id = EXCLUDED.id,
+            name = EXCLUDED.name,
+            image = EXCLUDED.image,
+            updated_at = NOW()
+        `;
         break;
       }
 
       case "user.deleted": {
         const userId = data.id;
-
         if (userId) {
-          await sql`
-            DELETE FROM users
-            WHERE id = ${userId}
-          `;
-
-          console.log(`Deleted Neon user: ${userId}`);
+          await sql`DELETE FROM users WHERE id = ${userId}`;
         }
-
         break;
       }
 
       default:
-        console.log(`Unhandled Clerk event: ${eventType}`);
+        console.log(`Unhandled Clerk webhook event type: ${eventType}`);
     }
-
-    return res.status(200).json({
-      success: true,
-      eventType,
-    });
+    return res.status(200).json({ success: true, eventType });
   } catch (error) {
-    // Database errors and event-processing errors are logged separately.
-    console.error("Neon database / webhook processing error:", error);
+    console.error("Clerk webhook/database error:", error);
 
     return res.status(500).json({
       error: "Webhook processing failed",
